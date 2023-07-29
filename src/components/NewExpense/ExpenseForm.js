@@ -2,36 +2,50 @@ import "./ExpenseForm.css";
 import { useState } from "react";
 
 const ExpenseForm = () => {
-  //   const [enteredTitle, setEnteredTitle] = useState("");
-  //   const [enteredAmount, setEnteredAmount] = useState("");
-  //   const [enteredDate, setEnteredDate] = useState("");
+  const [enteredTitle, setEnteredTitle] = useState("");
+  const [enteredAmount, setEnteredAmount] = useState("");
+  const [enteredDate, setEnteredDate] = useState("");
 
-  const [userInput, setUserInput] = useState({
-    enteredTitle: "",
-    enteredAmount: "",
-    enteredDate: "",
-  });
+  // const [userInput, setUserInput] = useState({
+  //   enteredTitle: "",
+  //   enteredAmount: "",
+  //   enteredDate: "",
+  // });
 
   const titleChangeHandler = (event) => {
-    setUserInput({
-      ...userInput,
-      enteredTitle: event.target.value,
-    });
+    setEnteredTitle(event.target.value);
+    // setUserInput({
+    //   ...userInput,
+    //   enteredTitle: event.target.value,
+    // });
+
+    //*this approach guarantees that the state returned will be the latest
+    //*this form is used if our state update is depended by the previous state
+    // setUserInput((prevState) => {
+    //   return { ...prevState, enteredTitle: event.target.value };
+    // });
   };
 
   const amountChangeHandler = (event) => {
-    setUserInput({
-      ...userInput,
-      enteredAmount: event.target.value,
-    });
+    setEnteredAmount(event.target.value);
   };
 
   const dateChangeHandler = (event) => {
-    setUserInput({
-      ...userInput,
-      enteredDate: event.target.value,
-    });
+    setEnteredDate(event.target.value);
   };
+
+  // *alternative shared change handler function
+  // const inputChangeHandler = (identifier, value) => {
+  //   if (identifier === "title") {
+  //     setEnteredTitle(value);
+  //   } else if (identifier === "date") {
+  //     setEnteredDate(value);
+  //   } else {
+  //     setEnteredAmount(value);
+  //   }
+  // };
+  //*the input would look like this
+  // <input type="text" onChange={(event) => inputChangeHandler('title', event.target.value)}  />
 
   return (
     <form>
